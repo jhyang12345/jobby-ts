@@ -1,5 +1,5 @@
 import { getWikiTable } from "../utils/requestHandler"
-
+import { BasicResponse } from 'models/requestModels'
 
 let defaultState = {
     fromText: "",
@@ -11,15 +11,15 @@ let defaultState = {
 
 const UPDATE_FROM_TEXT_WIKI_TABLE = "UPDATE_FROM_TEXT_WIKI_TABLE"
 
-export function setFromText(text) {
+export function setFromText(text: string) {
     return {
         type: UPDATE_FROM_TEXT_WIKI_TABLE,
         text,
     }
 }
 
-export function handleSetFromText(text) {
-    return (dispatch) => {
+export function handleSetFromText(text: string) {
+    return (dispatch: Function) => {
         dispatch(setUpdating(true))
         dispatch(setFromText(text))
     }
@@ -27,15 +27,15 @@ export function handleSetFromText(text) {
 
 const UPDATE_TO_TEXT_WIKI_TABLE = "UPDATE_TO_TEXT_WIKI_TABLE"
 
-export function setToText(text) {
+export function setToText(text: string) {
     return {
         type: UPDATE_TO_TEXT_WIKI_TABLE,
         text,
     }
 }
 
-export function handleSetToText(text) {
-    return (dispatch) => {
+export function handleSetToText(text: string) {
+    return (dispatch: Function) => {
         dispatch(setUpdating(true))
         dispatch(setToText(text))
     }
@@ -43,7 +43,7 @@ export function handleSetToText(text) {
 
 const SET_PENDING_WIKI_TABLE = "SET_PENDING_WIKI_TABLE"
 
-export function setPending(pending) {
+export function setPending(pending: boolean) {
     return {
         type: SET_PENDING_WIKI_TABLE,
         pending
@@ -52,7 +52,7 @@ export function setPending(pending) {
 
 const SET_SUCCEEDED_WIKI_TABLE = "SET_SUCCEEDED_WIKI_TABLE"
 
-export function setSucceeded(succeeded) {
+export function setSucceeded(succeeded: boolean) {
     return {
         type: SET_SUCCEEDED_WIKI_TABLE,
         succeeded,
@@ -61,19 +61,19 @@ export function setSucceeded(succeeded) {
 
 const SET_UPDATING_WIKI_TABLE = "SET_UPDATING_WIKI_TABLE"
 
-export function setUpdating(updating) {
+export function setUpdating(updating: boolean) {
     return {
         type: SET_UPDATING_WIKI_TABLE,
         updating
     }
 }
 
-export function handlePrestoWikiTable(text) {
-    return (dispatch) => {
+export function handlePrestoWikiTable(text: string) {
+    return (dispatch: Function) => {
         dispatch(setPending(true))
 
         return getWikiTable(text)
-            .then(result => {
+            .then((result: BasicResponse) => {
                 console.log("Response: ", result)
                 const { body, flag } = result
                 dispatch(setToText(body))
@@ -84,7 +84,7 @@ export function handlePrestoWikiTable(text) {
     }
 }
 
-export default function transformCreateToWiki(state=defaultState, action) {
+export default function transformCreateToWiki(state=defaultState, action: any) {
     switch (action.type) {
         case UPDATE_FROM_TEXT_WIKI_TABLE: {
             return {

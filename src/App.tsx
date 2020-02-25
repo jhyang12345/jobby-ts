@@ -7,11 +7,11 @@ import { Provider } from "react-redux";
 import { createStore } from "redux";
 import reducer from "./reducers";
 import middleware from "./middleware";
-import Header from "./components/Header";
-import Common from "./components/Common";
-import RDSToHive from "./components/RDSToHive";
-import WikiTable from "./components/WikiTable";
-import Home from "./components/Home";
+// import Header from "./components/Header";
+// import Common from "./components/Common";
+// import RDSToHive from "./components/RDSToHive";
+// import WikiTable from "./components/WikiTable";
+// import Home from "./components/Home";
 
 const store = createStore(reducer, middleware);
 
@@ -21,7 +21,7 @@ function App() {
       <Router>
         <div className="App">
           <GlobalStyle />
-          <Header />
+          {/* <Header />
           <AppContainer>
             <Common.Container>
               <Route path="/" exact component={Home.Home} />
@@ -37,7 +37,7 @@ function App() {
               />
               <Route path="/wiki-table" exact component={WikiTable.Component} />
             </Common.Container>
-          </AppContainer>
+          </AppContainer> */}
         </div>
       </Router>
     </Provider>
