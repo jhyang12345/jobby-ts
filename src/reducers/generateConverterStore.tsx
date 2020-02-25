@@ -1,4 +1,5 @@
 import { getRdsToHiveCreate } from "../utils/requestHandler"
+import { BasicResponse } from "models/requestModels"
 
 let defaultState = {
     fromText: "",
@@ -10,15 +11,15 @@ let defaultState = {
 
 const UPDATE_FROM_TEXT = "UPDATE_FROM_TEXT"
 
-export function setFromText(text, suffix) {
+export function setFromText(text: string, suffix: string) {
     return {
         type: addFormattedSuffix(UPDATE_FROM_TEXT, suffix),
         text,
     }
 }
 
-export function handleSetFromText(text, suffix) {
-    return (dispatch) => {
+export function handleSetFromText(text: string, suffix: string) {
+    return (dispatch: Function) => {
         dispatch(setUpdating(true, suffix))
         dispatch(setFromText(text, suffix))
     }
@@ -26,15 +27,15 @@ export function handleSetFromText(text, suffix) {
 
 const UPDATE_TO_TEXT = "UPDATE_TO_TEXT"
 
-export function setToText(text, suffix) {
+export function setToText(text: string, suffix: string) {
     return {
         type: addFormattedSuffix(UPDATE_TO_TEXT, suffix),
         text,
     }
 }
 
-export function handleSetToText(text, suffix) {
-    return (dispatch) => {
+export function handleSetToText(text: string, suffix: string) {
+    return (dispatch: Function) => {
         dispatch(setUpdating(true, suffix))
         dispatch(setToText(text, suffix))
     }
@@ -42,7 +43,7 @@ export function handleSetToText(text, suffix) {
 
 const SET_PENDING = "SET_PENDING"
 
-export function setPending(pending, suffix) {
+export function setPending(pending: boolean, suffix: string) {
     return {
         type: addFormattedSuffix(SET_PENDING, suffix),
         pending
@@ -51,7 +52,7 @@ export function setPending(pending, suffix) {
 
 const SET_SUCCEEDED = "SET_SUCCEEDED"
 
-export function setSucceeded(succeeded, suffix) {
+export function setSucceeded(succeeded: boolean, suffix: string) {
     return {
         type: addFormattedSuffix(SET_SUCCEEDED, suffix),
         succeeded,
@@ -60,19 +61,19 @@ export function setSucceeded(succeeded, suffix) {
 
 const SET_UPDATING = "SET_UPDATING"
 
-export function setUpdating(updating, suffix) {
+export function setUpdating(updating: boolean, suffix: string) {
     return {
         type: addFormattedSuffix(SET_UPDATING, suffix),
         updating
     }
 }
 
-export function handleFetchFunction(text, requestFunction, suffix) {
-    return (dispatch) => {
+export function handleFetchFunction(text: string, requestFunction: Function, suffix: string) {
+    return (dispatch: Function) => {
         dispatch(setPending(true, suffix))
 
         return requestFunction(text)
-            .then(result => {
+            .then((result: BasicResponse) => {
                 console.log("Response: ", result)
                 const { body, flag } = result
                 dispatch(setToText(body, suffix))
@@ -83,12 +84,12 @@ export function handleFetchFunction(text, requestFunction, suffix) {
     }
 }
 
-function addFormattedSuffix(action, suffix) {
+function addFormattedSuffix(action: string, suffix: string) {
     return `${action}@${suffix}`
 }
 
-export default function generateConverterStore(state=defaultState, actionSuffix) {
-    return (state=defaultState, action) => {
+export default function generateConverterStore(state=defaultState, actionSuffix: string) {
+    return (state=defaultState, action: any) => {
         switch (action.type) {
             case addFormattedSuffix(UPDATE_FROM_TEXT, actionSuffix): {
                 return {
