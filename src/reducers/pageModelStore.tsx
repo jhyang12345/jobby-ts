@@ -53,16 +53,16 @@ export function handleFetchPageModel() {
     return (dispatch: Function) => {
         return getPageDict()
             .then((result: BasicResponse) => {
-                const { body, flag } = result
+                const body: any = result.body
                 dispatch(setPageModel(body["page_dict"]))
             })
     }
 }
 
-const getpageMap = (pageModel) => {
+const getpageMap = (pageModel: any) => {
     let stack = [pageModel]
 
-    const pageMap = {
+    const pageMap: any = {
 
     }
 
@@ -74,7 +74,9 @@ const getpageMap = (pageModel) => {
             }
         } else if (obj instanceof Object) {
             if (Object.keys(obj).includes("url")) {
-                pageMap[obj["url"]] = {
+                const url: string = obj["url"]
+
+                pageMap[url] = {
                     "title": obj["title"],
                     "id": obj["id"]
                 }
