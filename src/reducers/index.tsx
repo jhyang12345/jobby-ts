@@ -1,12 +1,6 @@
 import { combineReducers} from "redux"
-import pageModelStore from "./pageModelStore";
-import rdsToHiveCreate from "./RdsToHiveCreate";
-import rdsToHiveSelect from "./RDSToHiveSelect"
-import transformCreateToWiki from "./WikiTable";
+import pageModelStore from "./pageModelStore"
 
 export default combineReducers({
     pageModelStore,
-    transformRDSToHiveSelect: rdsToHiveSelect,
-    transformRDSToHiveCreate: rdsToHiveCreate,
-    transformCreateToWiki,
 })

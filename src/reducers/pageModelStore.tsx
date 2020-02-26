@@ -1,4 +1,5 @@
 import { getPageDict } from "../utils/requestHandler";
+import { BasicResponse } from "models/requestModels";
 
 export const SET_PAGE_MODEL = "SET_PAGE_MODEL"
 
@@ -41,7 +42,7 @@ let defaultState = {
     }
 }
 
-export function setPageModel(pageModel) {
+export function setPageModel(pageModel: any) {
     return {
         type: SET_PAGE_MODEL,
         pageModel,
@@ -49,9 +50,9 @@ export function setPageModel(pageModel) {
 }
 
 export function handleFetchPageModel() {
-    return (dispatch) => {
+    return (dispatch: Function) => {
         return getPageDict()
-            .then(result => {
+            .then((result: BasicResponse) => {
                 const { body, flag } = result
                 dispatch(setPageModel(body["page_dict"]))
             })
@@ -88,7 +89,7 @@ const getpageMap = (pageModel) => {
     return pageMap
 }
 
-export default function pageModelStore(state = defaultState, action) {
+export default function pageModelStore(state = defaultState, action: any) {
     switch (action.type) {
         case SET_PAGE_MODEL: {
             return {
